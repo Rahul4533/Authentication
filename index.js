@@ -7,7 +7,7 @@ const app=express();
 
 
 
-
+const db=require('./config/mongoose')
 
 //Establish the server on port no 8000
 

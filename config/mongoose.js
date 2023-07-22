@@ -1,6 +1,12 @@
 const mongoose=require('mongoose')
 //connecting to dataBase
-mongoose.connect('mongodb://localhost:27017/User')
+mongoose.connect('mongodb://127.0.0.1:27017/User',{
+    useNewUrlParser: true,
+
+    useUnifiedTopology: true,
+
+    family: 4,
+})
 
 const db=mongoose.connection;
 //success message
