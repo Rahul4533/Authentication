@@ -14,6 +14,8 @@ const userSchema=new mongoose.Schema({
         type: String,
         required: true
     }
+},{
+    timestamps: true
 })
 
 // creating model of user

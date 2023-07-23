@@ -1,10 +1,14 @@
 const express=require('express')
 
-const route=express.Router();
+const router=express.Router();
 
 const HomeController=require('../Controller/userController')
 
-router.get('/',HomeController.sign_up);
+router.get('/',HomeController.sign_in);
+
+router.get('/signup',HomeController.signup);
+
+router.post('/signup',HomeController.create);
 
 
 
