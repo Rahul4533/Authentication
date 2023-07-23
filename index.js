@@ -3,11 +3,18 @@ const port=8000;
 
 const app=express();
 
+// Middleware 
 
 
+// setting up the view engine
+
+app.set('view engine','ejs')
+app.set('views','./Views');
 
 
 const db=require('./config/mongoose')
+
+app.use('/',require('./Router'))
 
 //Establish the server on port no 8000
 
