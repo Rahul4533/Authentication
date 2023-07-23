@@ -1,5 +1,5 @@
 const User = require("../models/user");
-
+const bcrypt=require('bcryptjs');
 // Signup page 
 module.exports.sign_in = (req, res) => {
   res.render("signin", {});
@@ -26,7 +26,17 @@ module.exports.create = async (req, res) => {
         console.log("User Alrady Exists");
         res.render("signin", {});
       } else {
-        User.create(req.body);
+
+
+        // Password Encrypted with bctypt 
+      const salt= await bcrypt.genSalt(10);
+     const  secPass= await bcrypt.hash(req.body.password,salt)
+
+        User.create({
+            name:req.body.name,
+            email:req.body.email,
+            password:secPass
+        });
         res.render("signin", {});
 
         console.log("user created successfully");
