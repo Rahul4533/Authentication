@@ -11,7 +11,7 @@ app.use(express.static('./assets'));
 // setting up the view engine
 
 app.set('view engine','ejs')
-app.set('views','./Views');
+app.set('views','./views');
 
 
 const db=require('./config/mongoose')
