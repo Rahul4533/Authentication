@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 //connecting to dataBase
-mongoose.connect('mongodb://127.0.0.1:27017/User',{
+mongoose.connect('mongodb+srv://Rahul4533:4533rahul@rahul.pfskwld.mongodb.net/user',{
     useNewUrlParser: true,
 
     useUnifiedTopology: true,
