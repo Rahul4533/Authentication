@@ -45,6 +45,6 @@ module.exports.create = async (req, res) => {
 
     25;
   } catch (error) {
-    console.log('error while creating user');
+    console.log('error while creating user',error);
   }
 };
