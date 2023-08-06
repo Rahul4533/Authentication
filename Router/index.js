@@ -10,6 +10,8 @@ router.get('/signup',HomeController.signup);
 
 router.post('/signup',HomeController.create);
 
+router.get('/forget',HomeController.forget);
+
 
 
 

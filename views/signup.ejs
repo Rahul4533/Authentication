@@ -1,48 +1,22 @@
-<link rel="stylesheet" href="/css/signup.css"
-
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/signup.css"> <!-- Add a CSS file for styling -->
+</head>
 <body>
-  
-    <h2>Modal Signup Form</h2>
-    <!--Step 1:Adding HTML-->
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
-  
-    <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-        <form class="modal-content animate" action="/signup" method="post">
-            <div class="container">
-                <label><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" required>
-
-                <label><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
-  
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-  
-                <label><b>Confirm Password</b></label>
-                <input type="password" placeholder="Confirm Password" name="confirm_password" required>
-                <input type="checkbox"> Remember me
-                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-  
-                <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="submit" class="signupbtn">Sign Up</button>
-                </div>
-            </div>
-        </form>
-    </div>
-  
-    <!--close the modal by just clicking outside of the modal-->
-    <script>
-        var modal = document.getElementById('id01');
-          
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-  
+    <h1>Sign Up</h1>
+    <form action="/signup" method="post"> 
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required> <!-- Use 'tel' input type for mobile number and set pattern to allow only 10 digits -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Sign Up">
+    </form>
+    <p>Already have an account  ? <a href="/">Log in</a></p> 
 </body>
-  
+</html>
