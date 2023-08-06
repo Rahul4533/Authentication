@@ -33,6 +33,8 @@ module.exports.create = async (req, res) => {
           name: req.body.name,
           email: req.body.email,
           password: secPass,
+          username: req.body.username,
+          mobile: req.body.mobile
         });
         res.render("signin", {});
 
