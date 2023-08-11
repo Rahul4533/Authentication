@@ -3,7 +3,16 @@ const port=8000;
 
 const app=express();
 
+// use for session cookie
+const passport=require('passport')
+const session=require('express-session');
+const passportjwt= require('./config/passport-jwt');
+
+
+
+
 // Middleware 
+app.use(passport.initialize())
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static('./assets'));
 

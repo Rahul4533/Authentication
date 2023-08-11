@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const jsonwebtoken=require('jsonwebtoken');
 // Signup page
 module.exports.sign_in = (req, res) => {
   res.render("signin", {});
@@ -57,4 +58,34 @@ module.exports.forget=function(req,res) {
     
   })
   
+}
+
+// Login user
+module.exports.login= async function(req,res){
+
+  const {email,password}=req.body;
+  try {
+     const user= await User.findOne({email: email})
+
+     const ismatch= await bcrypt.compare(password,user.password);
+
+     if (!ismatch) {
+      return res.status(400).json({ message: "Invalid username or password" });
+    }
+ 
+    const token = jwt.sign(
+      user.toJSON(),
+      'Rahul',
+      {
+        expiresIn: "10000",
+      }
+    );
+ 
+    res.json({ message: "Logged in successfully", token });
+
+
+  } catch (error) {
+    
+    console.log('error');
+  }
 }
