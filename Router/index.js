@@ -14,7 +14,7 @@ router.post('/signup',HomeController.create);
 
 router.get('/forget',HomeController.forget);
 
-router.post('/login',passport.authenticate('local', { failureRedirect: '/login' }),HomeController.login);
+router.post('/login',passport.authenticate('local', { failureRedirect: '/signup' }),HomeController.login);
 
 
 
