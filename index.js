@@ -8,6 +8,7 @@ const passport=require('passport')
 const session = require('express-session');
 const passportjwt= require('./config/passport-jwt');
 const passportLocal=require('./config/passport');
+const flash=require('express-flash');
 
 
 
@@ -24,7 +25,7 @@ app.use(session({
 }));
 app.use(passport.initialize())
 app.use(passport.session());
-//app.use()
+app.use(flash());
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static('./assets'));
 app.use('/',require('./Router'))

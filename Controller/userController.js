@@ -62,6 +62,9 @@ module.exports.forget=function(req,res) {
 
 // Login user
 module.exports.login= async function(req,res){
-console.log(req.body)
-  res.end('<h1>Login success</h1>');
+  
+  
+res.render('profile',{
+   data: req.user
+})
 }
