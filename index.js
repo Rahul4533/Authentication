@@ -5,16 +5,32 @@ const app=express();
 
 // use for session cookie
 const passport=require('passport')
-const session=require('express-session');
+const session = require('express-session');
 const passportjwt= require('./config/passport-jwt');
+const passportLocal=require('./config/passport');
 
 
 
 
 // Middleware 
+app.use(session({
+    name:'codeial',
+    secret:'Rahul',
+    saveUninitialized:false,
+    resave:false,
+    cookie: {
+        maxAge:(1000*60*100),
+    }
+}));
 app.use(passport.initialize())
+app.use(passport.session());
+//app.use()
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static('./assets'));
+app.use('/',require('./Router'))
+
+
+
 
 
 // setting up the view engine
@@ -25,7 +41,7 @@ app.set('views','./views');
 
 const db=require('./config/mongoose')
 
-app.use('/',require('./Router'))
+
 
 //Establish the server on port no 8000
 

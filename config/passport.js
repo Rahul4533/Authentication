@@ -1,40 +1,49 @@
+const passport= require('passport');
+
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
 //------------ Local User Model ------------//
 const User = require('../models/user');
 
-module.exports = function (passport) {
     passport.use(
-        new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+        new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
             //------------ User Matching ------------//
-            User.findOne({
-                email: email
-            }).then(user => {
-                if (!user) {
-                    return done(null, false, { message: 'This email ID is not registered' });
-                }
+            const user= await User.findOne({ email: email});
+            
+            
+            if(!user){
+                return done(null,false,{message:'The email id is not registered'})
+            }
 
                 //------------ Password Matching ------------//
-                bcrypt.compare(password, user.password, (err, isMatch) => {
-                    if (err) throw err;
-                    if (isMatch) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false, { message: 'Password incorrect! Please try again.' });
-                    }
-                });
-            });
-        })
+           const ismatch= await      bcrypt.compare(password, user.password);
+
+            if(!ismatch){
+                return done(null,false,{message:' Inavalid Password'})
+            }
+           
+            return done(null,user,{message:'user find'})
+            
+           })
     );
+        
+    
 
     passport.serializeUser(function (user, done) {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(async function (id, done) {
+        const user=await User.findById(id) ;
+
+        if(user){
+        return done(null,user);
+        }else{
+            return done(null,false)
+        }
+           
+       
     });
-};
+
+module.exports=passport;

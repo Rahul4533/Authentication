@@ -4,6 +4,7 @@ const router=express.Router();
 
 const HomeController=require('../Controller/userController')
 
+const passport= require('passport')
 
 router.get('/',HomeController.sign_in);
 
@@ -13,7 +14,9 @@ router.post('/signup',HomeController.create);
 
 router.get('/forget',HomeController.forget);
 
-router.post('/login',passport.authenticate('jwt', { session: false }) ,HomeController.login);
+router.post('/login',passport.authenticate('local', { failureRedirect: '/login' }),function(req,res){
+  res.json(req.user);
+} ,HomeController.login);
 
 
 

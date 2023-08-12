@@ -6,14 +6,16 @@ const extractjwt=require('passport-jwt').ExtractJwt;
 
 const User=require('../models/user');
 
-let opts={
-    jwtFromRequest :extractjwt.fromAuthHeaderAsBearerToken,
-    secretOrKey :'Rahul'
-}
+let opts={};
+
+opts.jwtFromRequest = extractjwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
+
 
 passport.use(new passportjwt(opts,async function(jwtPayLoad,done){
 try {
-    const user= await User.findById(jwtPayLoad._id);
+    console.log(jwtPayLoad);
+    const user= await User.findOne({_id:jwtPayLoad});
 
     if(user){
         return done(null,user)
