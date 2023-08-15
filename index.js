@@ -8,26 +8,26 @@ const passport=require('passport')
 const session = require('express-session');
 const passportjwt= require('./config/passport-jwt');
 const passportLocal=require('./config/passport');
-const flash=require('express-flash');
-
-
-
+const flash=require('connect-flash');
+const middleware=require('./config/middleware');
+const google= require('./config/passport-google-oauth');
 
 // Middleware 
 app.use(session({
     name:'codeial',
-    secret:'Rahul',
-    saveUninitialized:false,
-    resave:false,
+    secret:'secret',
+    saveUninitialized:true,
+    resave:true,
     cookie: {
         maxAge:(1000*60*100),
     }
 }));
 app.use(passport.initialize())
 app.use(passport.session());
-app.use(flash());
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static('./assets'));
+app.use(flash());
+app.use(middleware.setflash);
 app.use('/',require('./Router'))
 
 

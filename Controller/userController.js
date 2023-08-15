@@ -2,9 +2,9 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt=require('jsonwebtoken');
 // Signup page
-module.exports.sign_in = (req, res) => {
-  res.render("signin", {});
-};
+module.exports.sign_in = (req, res) =>{
+  res.render("signin", {}
+)};
 
 // sign in page
 module.exports.signup = (req, res) => {
@@ -63,7 +63,7 @@ module.exports.forget=function(req,res) {
 // Login user
 module.exports.login= async function(req,res){
   
-  
+  req.flash("success",'Login Success');
 res.render('profile',{
    data: req.user
 })

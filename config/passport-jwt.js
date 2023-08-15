@@ -16,8 +16,8 @@ passport.use(new passportjwt(opts,async function(jwtPayLoad,done){
 try {
     console.log(jwtPayLoad);
     const user= await User.findOne({_id:jwtPayLoad});
-
-    if(user){
+      console.log('user');
+  if(user){
         return done(null,user)
     }else{
         return done(null,false)
