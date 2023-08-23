@@ -1,5 +1,5 @@
 const express=require('express')
-
+const middle=require('../config/middleware');
 const router=express.Router();
 
 const HomeController=require('../Controller/userController')
@@ -22,9 +22,11 @@ router.get('/auth' , passport.authenticate('google', { scope:
 
 router.get( '/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/auth/callback/success',
-        failureRedirect: '/auth/callback/failure'
+        failureRedirect: '/signup',
+        successRedirect: '/',
 }));
+
+router.get('/logout',HomeController.logout);
 
 
 

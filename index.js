@@ -30,6 +30,8 @@ app.use(flash());
 app.use(middleware.setflash);
 app.use('/',require('./Router'))
 
+app.use(middleware.setAuthancitedUser);
+
 
 
 

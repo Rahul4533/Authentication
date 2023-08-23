@@ -37,8 +37,10 @@ module.exports.create = async (req, res) => {
           username: req.body.username,
           mobile: req.body.mobile
         });
-        res.render("signin", {});
 
+        
+        res.render("signin", {});
+        req.flash('success_message',"Registerd SuccesFully");
         console.log("user created successfully");
       }
     }
@@ -63,8 +65,14 @@ module.exports.forget=function(req,res) {
 // Login user
 module.exports.login= async function(req,res){
   
-  req.flash("success",'Login Success');
 res.render('profile',{
-   data: req.user
+  data: req.user
 })
+}
+
+module.exports.logout= (req,res,next)=>{
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 }

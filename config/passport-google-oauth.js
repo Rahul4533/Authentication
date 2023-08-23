@@ -12,10 +12,24 @@ passport.use(new googleStratigy({
 
 async function(accessToken,refreshToken,profile,done){
     try {
-      
-      console.log(user);
+      const user= await User.findOne({email: profile.emails[0].value});
+
+      if(user){
+        return done(null,user);
+      }else{
+        User.create({
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            password: crypto.randomBytes(20).toString('hex')
+        })
+      }
+
+      return done(null, user);
+
+
+     
     } catch (error) {
-        console.log(error)
+       console.log(error);
     }
    
  

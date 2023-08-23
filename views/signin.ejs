@@ -23,6 +23,12 @@
                 <div class="login-form">
                     <h2>Login</h2>
                     <form action="/login" method="post">
+                        <% if(success_message != '') { %>}
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <strong> <%= success_message %> </strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+                          </div>
+                          <% } %>
                         <p> <label>Username/Email address<span>*</span></label> <input type="text" placeholder="Username or Email" name="email" required> </p>
                         <p> <label>Password<span>*</span></label> <input type="password" name="password" placeholder="Password" required> </p>
                         <p> <input type="submit" value="Sign In"> </p>
