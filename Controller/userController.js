@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt=require('jsonwebtoken');
+//Mailer 
+
+const signupmail=require('../mailers/sentmail');
 // Signup page
 module.exports.sign_in = (req, res) =>{
   res.render("signin", {}
@@ -14,7 +17,7 @@ module.exports.signup = (req, res) => {
 // This will create the New user If User Already Exists Then redirect to login page
 module.exports.create = async (req, res) => {
   console.log(req.body);
-
+let email= req.body.email;
   try {
     const user = await User.find({ email: req.body.email });
     console.log(user);
@@ -41,6 +44,7 @@ module.exports.create = async (req, res) => {
         
         res.render("signin", {});
         req.flash('success_message',"Registerd SuccesFully");
+        signupmail.signup(email);
         console.log("user created successfully");
       }
     }
