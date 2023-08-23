@@ -14,7 +14,7 @@ const google= require('./config/passport-google-oauth');
 
 // Middleware 
 app.use(session({
-    name:'codeial',
+    name:'codeail',
     secret:'secret',
     saveUninitialized:true,
     resave:true,

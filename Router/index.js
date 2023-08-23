@@ -16,17 +16,15 @@ router.get('/forget',HomeController.forget);
 
 router.post('/login',passport.authenticate('local', { failureRedirect: '/signup' }),HomeController.login);
 
-router.get('/google',passport.authenticate('google',{
-    scope:["profile","email"]
-}))
+router.get('/auth' , passport.authenticate('google', { scope:
+    [ 'email', 'profile' ]
+}));
 
-router.get('/google/callback',passport.authenticate('google', {failureRedirect: '/signup'}),HomeController.login)
-
-router.get('/logout', (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect('/');
-    })
+router.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/auth/callback/success',
+        failureRedirect: '/auth/callback/failure'
+}));
 
 
 
