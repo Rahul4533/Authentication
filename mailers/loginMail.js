@@ -8,11 +8,5 @@ exports.login= (user,name)=>{
         to: user,
         subject: 'Login SUCCESS',
         html: `<h1> Hello ${name} You Are Login SuccessFully`
-    }, (err,info)=>{
-        if(err) {
-            console.log('error',err);
-            return;
-        }
-        console.log(info);
     })
 }

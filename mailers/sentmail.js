@@ -8,14 +8,5 @@ exports.signup = (user)=>{
         subject: 'Sign Up mail Notify',
         html: '<h1> hello Welcome to coding Ninja </h1>'
         
-    }, (err,info)=>{
-        if(err){
-            console.log('errror',err)
-            return
-        }
-        console.log('Message Sent', info);
-
-        return;
-
     })
 }
