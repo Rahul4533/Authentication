@@ -28,7 +28,11 @@ router.get( '/auth/google/callback',
 
 router.get('/logout',HomeController.logout);
 
+router.post('/update',HomeController.update);
 
 
+router.post('/update/change',HomeController.change);
+
+router.get('/update',HomeController.changepassword);
 
 module.exports=router;

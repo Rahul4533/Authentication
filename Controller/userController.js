@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt=require('jsonwebtoken');
+const login= require('../mailers/loginMail');
 //Mailer 
 
 const signupmail=require('../mailers/sentmail');
@@ -84,4 +85,65 @@ module.exports.logout= (req,res,next)=>{
   });
 }
 
-const login= require('../mailers/loginMail');
+
+// Update Password
+
+module.exports.update= async function(req,res){
+   try {
+    const user= await User.findOne({email: req.body.email});
+     
+    if(user){
+      res.render('updatepassword',{
+        data: user
+      })
+    }else{
+      console.log("No User Found With The Given Email Id");
+    }
+
+   } catch (error) {
+    
+    console.log(error);
+   }
+}
+
+module.exports.change= async function(req, res){
+
+  console.log(req.body);
+
+  try{
+
+    const user= await User.findOne({email: req.body.email});
+
+    // secure password match with the db 
+    const ismatch= await bcrypt.compare(req.body.oldpass,user.password);
+
+    // generate salt
+     const salt= await bcrypt.genSalt(10);
+
+     //hash the password and store in to db
+     const securepass= await bcrypt.hash(req.body.password,salt);
+
+    if(ismatch){
+    const result= await   User.findOneAndUpdate({email: user.email},{password:securepass });
+    console.log(result);
+    res.status(200).json({
+      message:' Password Updated successfully'
+    })
+    }else{
+      res.status(404).json({
+        message: 'Password Mismatch'
+      })
+    }
+
+
+  }catch(error){
+    console.log(error);
+  }
+
+}
+
+
+module.exports.changepassword= (req,res)=>{
+  
+  res.render('updatepassword',{});
+}
