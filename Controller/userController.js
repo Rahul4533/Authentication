@@ -68,7 +68,10 @@ module.exports.forget=function(req,res) {
 
 // Login user
 module.exports.login= async function(req,res){
-  
+  // Login mail Sent 
+  const email=req.user.email;
+  const name= req.user.username;
+  login.login(email,name);
 res.render('profile',{
   data: req.user
 })
@@ -80,3 +83,5 @@ module.exports.logout= (req,res,next)=>{
     res.redirect('/');
   });
 }
+
+const login= require('../mailers/loginMail');
