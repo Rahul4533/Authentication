@@ -2,6 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt=require('jsonwebtoken');
 const login= require('../mailers/loginMail');
+const changepassword=require('../mailers/changepassword');
 //Mailer 
 
 const signupmail=require('../mailers/sentmail');
@@ -86,25 +87,7 @@ module.exports.logout= (req,res,next)=>{
 }
 
 
-// Update Password
 
-module.exports.update= async function(req,res){
-   try {
-    const user= await User.findOne({email: req.body.email});
-     
-    if(user){
-      res.render('updatepassword',{
-        data: user
-      })
-    }else{
-      console.log("No User Found With The Given Email Id");
-    }
-
-   } catch (error) {
-    
-    console.log(error);
-   }
-}
 
 module.exports.change= async function(req, res){
 
@@ -113,7 +96,8 @@ module.exports.change= async function(req, res){
   try{
 
     const user= await User.findOne({email: req.body.email});
-
+     let email= user.email;
+     let name=user.username;
     // secure password match with the db 
     const ismatch= await bcrypt.compare(req.body.oldpass,user.password);
 
@@ -125,7 +109,7 @@ module.exports.change= async function(req, res){
 
     if(ismatch){
     const result= await   User.findOneAndUpdate({email: user.email},{password:securepass });
-    console.log(result);
+     changepassword.password(email,name);
     res.status(200).json({
       message:' Password Updated successfully'
     })
@@ -143,7 +127,3 @@ module.exports.change= async function(req, res){
 }
 
 
-module.exports.changepassword= (req,res)=>{
-  
-  res.render('updatepassword',{});
-}

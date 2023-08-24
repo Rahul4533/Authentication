@@ -9,4 +9,17 @@ Email:<%= data.email %><br>
 
 <a href="/logout">Logout</a>
 
-<a href="/update">Change-Password</a>
+<form action="/update/change" method="post">
+
+    <label>Email</label>
+    <input type="email"  value=" <%= data.email %>" name="email" >
+   
+    <label>Enter the new Password</label>
+    <input type="text" name="oldpass" placeholder="Old Password" required >
+    <label> Enter the New password </label>
+    <input type="text" name="password" placeholder="password">
+    <input type="submit" value="Change-Password">
+   
+   
+   
+   </form>

@@ -1,5 +1,5 @@
 const nodemailer= require('../config/nodemailer');
-
+// sign up alert mail
 exports.signup = (user)=>{
 
     nodemailer.transporter.sendMail({

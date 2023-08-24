@@ -1,7 +1,7 @@
 const nodemailer=require('../config/nodemailer');
 
 
-
+// login alert mail
 exports.login= (user,name)=>{
     nodemailer.transporter.sendMail({
         from: 'rahulsingh4533@gmail.com',
